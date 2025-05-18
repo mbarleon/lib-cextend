@@ -133,7 +133,7 @@ void throw(int code)
     siglongjmp(ctxt->__env, code);
 }
 
-void catch_code_end(const int code)
+void catch_end(const int code)
 {
     end_try();
     throw(code);

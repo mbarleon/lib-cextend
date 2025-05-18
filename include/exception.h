@@ -14,7 +14,7 @@
     #define TRY(code, ctxt) __TRY(code, ctxt)
     #define CATCH(code, expected) __CATCH(code, expected)
     #define CATCH_ALL __CATCH_ALL
-    #define CATCH_CODE_END(code) __CATCH_CODE_END(code)
+    #define CATCH_END(code) __CATCH_END(code)
     #define END_TRY __END_TRY
     #define THROW(code) __THROW__(code)
 
