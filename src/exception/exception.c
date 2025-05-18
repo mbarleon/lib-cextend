@@ -8,12 +8,12 @@
 #include "exception_internal.h"
 
 static const char *libc_ext_exception_description[] = {
-    "No exception",
+    "no exception",
 
     "bad arguments",
     "bad alloc",
 
-    "Unknown exception"
+    "unknown exception"
 };
 
 static void print_stacktrace(void)
@@ -67,15 +67,19 @@ static void *init_internals(void)
     return internal;
 }
 
-static void check_stack(const libc_ext_exception_context_t *stack,
+static void check_stack(const libc_ext_exception_context_t *ctxt,
     const int code)
 {
-    if (stack == NULL) {
+    if (ctxt && ctxt->__internals) {
+        return;
+    } else if (ctxt == NULL) {
         LIBC_EXT_PRT(LOG_ERROR, "Uncaught exception: %s",
             get_exception_str(code));
-        print_stacktrace();
-        abort();
+    } else {
+        LIBC_EXT_PRT(LOG_ERROR, "Exception stack was illegaly modified");
     }
+    print_stacktrace();
+    abort();
 }
 
 libc_ext_exception_context_t *init_try(void)
