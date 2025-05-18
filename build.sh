@@ -82,7 +82,8 @@ function _clean()
 function _fclean()
 {
     _clean
-    rm -rf cextended unit_tests plugins code_coverage.txt unit_tests-*.profraw unit_tests.profdata vgcore* cmake-build-debug
+    rm -rf cextended unit_tests plugins code_coverage.txt unit_tests-*.profraw unit_tests.profdata \
+    libs/libcextended.* vgcore* cmake-build-debug a.out
 }
 
 for args in "$@"

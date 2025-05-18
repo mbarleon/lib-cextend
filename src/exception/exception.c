@@ -51,6 +51,33 @@ const char *get_exception_str(const int code)
     return libc_ext_exception_description[code];
 }
 
+static void *init_internals(void)
+{
+    libc_ext_exception_internal_t *internal = (libc_ext_exception_internal_t *)
+        aligned_alloc(__LIBC_EXT_EXCEPTION_CONTEXT_ALIGNMENT,
+        sizeof(libc_ext_exception_internal_t));
+
+    if (!internal) {
+        LIBC_EXT_LOG(LOG_ERROR, "could not allocate memory for try");
+        return NULL;
+    }
+    memset(internal, 0, sizeof(libc_ext_exception_internal_t) / sizeof(char));
+    internal->__was_used = false;
+    internal->__prev = get_exception_stack(NULL, true);
+    return internal;
+}
+
+static void check_stack(const libc_ext_exception_context_t *stack,
+    const int code)
+{
+    if (stack == NULL) {
+        LIBC_EXT_PRT(LOG_ERROR, "Uncaught exception: %s",
+            get_exception_str(code));
+        print_stacktrace();
+        abort();
+    }
+}
+
 libc_ext_exception_context_t *init_try(void)
 {
     libc_ext_exception_context_t *ctxt = (libc_ext_exception_context_t *)
@@ -62,37 +89,44 @@ libc_ext_exception_context_t *init_try(void)
         throw(LIBC_EXT_EXCEPTION_BAD_ALLOC);
     }
     memset(ctxt, 0, sizeof(libc_ext_exception_context_t) / sizeof(char));
-    ctxt->__was_used = false;
-    ctxt->__prev = get_exception_stack(NULL, true);
+    ctxt->__internals = init_internals();
+    if (!ctxt->__internals) {
+        free(ctxt);
+        throw(LIBC_EXT_EXCEPTION_BAD_ALLOC);
+    }
     get_exception_stack(ctxt, false);
     return ctxt;
 }
 
 void end_try(void)
 {
+    libc_ext_exception_internal_t *internal;
     libc_ext_exception_context_t *ctxt = get_exception_stack(NULL, true);
 
     if (ctxt) {
-        get_exception_stack(ctxt->__prev, false);
+        internal = (libc_ext_exception_internal_t *)ctxt->__internals;
+        get_exception_stack(internal->__prev, false);
+        free(internal);
         free(ctxt);
     }
 }
 
 void throw(int code)
 {
-    libc_ext_exception_context_t *stack = get_exception_stack(NULL, true);
+    libc_ext_exception_context_t *ctxt = get_exception_stack(NULL, true);
+    libc_ext_exception_internal_t *internal = ctxt ?
+        (libc_ext_exception_internal_t *)ctxt->__internals : NULL;
 
-    if (stack == NULL) {
-        LIBC_EXT_PRT(LOG_ERROR, "Uncaught exception: %s",
-            get_exception_str(code));
-        print_stacktrace();
-        abort();
-    } else if (stack->__was_used == true) {
+    check_stack(ctxt, code);
+    if (internal->__was_used == true) {
         end_try();
-        stack = get_exception_stack(NULL, true);
+        ctxt = get_exception_stack(NULL, true);
+        check_stack(ctxt, code);
+        internal = ctxt ?
+            (libc_ext_exception_internal_t *)ctxt->__internals : NULL;
     }
-    stack->__was_used = true;
-    siglongjmp(stack->__env, code);
+    internal->__was_used = true;
+    siglongjmp(ctxt->__env, code);
 }
 
 void catch_code_end(const int code)

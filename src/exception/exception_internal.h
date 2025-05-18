@@ -17,4 +17,12 @@
 
     #define __LIBC_EXT_STACKTRACE_SIZE 100
 
+struct __attribute__((aligned(__LIBC_EXT_EXCEPTION_CONTEXT_ALIGNMENT)))
+    libc_ext_exception_internal_s {
+    bool __was_used;
+    libc_ext_exception_context_t *__prev;
+};
+
+typedef struct libc_ext_exception_internal_s libc_ext_exception_internal_t;
+
 #endif /* !LIBC_EXT_EXCEPTION_INTERNAL_H_ */

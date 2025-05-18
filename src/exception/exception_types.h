@@ -24,8 +24,7 @@ typedef enum {
 struct __attribute__((aligned(__LIBC_EXT_EXCEPTION_CONTEXT_ALIGNMENT)))
     libc_ext_exception_context_s {
     sigjmp_buf __env;
-    bool __was_used;
-    struct libc_ext_exception_context_s *__prev;
+    void *__internals;
 };
 
 typedef struct libc_ext_exception_context_s libc_ext_exception_context_t;
