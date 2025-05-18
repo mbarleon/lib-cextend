@@ -29,4 +29,7 @@ struct __attribute__((aligned(__C_EXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
 
 typedef struct c_extend_exception_context_s c_extend_exception_context_t;
 
+typedef volatile int vint_t;
+typedef vint_t c_extend_exception_code_t;
+
 #endif /* !EXCEPTION_TYPES_H_ */
