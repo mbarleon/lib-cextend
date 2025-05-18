@@ -5,12 +5,12 @@
 ** logger
 */
 
-#ifndef LIBC_EXT_LOGGER_H_
-    #define LIBC_EXT_LOGGER_H_
+#ifndef C_EXTEND_LOGGER_H_
+    #define C_EXTEND_LOGGER_H_
     #include "../src/logger/logger.h"
 
-    #define LIBC_EXT_INIT_LOG __LIBC_EXT_INIT_LOG
-    #define LIBC_EXT_LOG(type, fmt, ...) __LC_EXT_LOG(type, fmt, ##__VA_ARGS__)
-    #define LIBC_EXT_PRT(type, fmt, ...) __LC_EXT_PRT(type, fmt, ##__VA_ARGS__)
+    #define C_EXTEND_INIT_LOG __C_EXTEND_INIT_LOG
+    #define C_EXTEND_LOG(type, fmt, ...) __LC_EXT_LOG(type, fmt, ##__VA_ARGS__)
+    #define C_EXTEND_PRT(type, fmt, ...) __LC_EXT_PRT(type, fmt, ##__VA_ARGS__)
 
-#endif /* !LIBC_EXT_LOGGER_H_ */
+#endif /* !C_EXTEND_LOGGER_H_ */

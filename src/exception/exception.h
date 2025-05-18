@@ -5,11 +5,11 @@
 ** exception
 */
 
-#ifndef __LIBC_EXT_EXCEPTION_H_
-    #define __LIBC_EXT_EXCEPTION_H_
+#ifndef __C_EXTEND_EXCEPTION_H_
+    #define __C_EXTEND_EXCEPTION_H_
     #include "exception_types.h"
 
-libc_ext_exception_context_t *init_try(void);
+c_extend_exception_context_t *init_try(void);
 void end_try(void);
 void throw(int code);
 const char *get_exception_str(const int code);
@@ -24,4 +24,4 @@ void catch_end(const int code);
     #define __END_TRY end_try()
     #define __THROW__(code) throw(code)
 
-#endif /* !__LIBC_EXT_EXCEPTION_H_ */
+#endif /* !__C_EXTEND_EXCEPTION_H_ */

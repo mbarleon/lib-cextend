@@ -5,8 +5,8 @@
 ** logger_internal
 */
 
-#ifndef LIBC_EXT_LOGGER_INTERNAL_H_
-    #define LIBC_EXT_LOGGER_INTERNAL_H_
+#ifndef C_EXTEND_LOGGER_INTERNAL_H_
+    #define C_EXTEND_LOGGER_INTERNAL_H_
 
     #include <stdio.h>
     #include <stddef.h>
@@ -17,22 +17,22 @@
 
     #include "logger.h"
 
-    #define LIBC_EXT_LOGGER_CRED "\x1b[31m"
-    #define LIBC_EXT_LOGGER_CRESET "\x1b[0m"
-    #define LIBC_EXT_LOGGER_CYELLOW "\x1b[33m"
-    #define LIBC_EXT_LOGGER_CPURPLE "\x1b[35m"
+    #define C_EXTEND_LOGGER_CRED "\x1b[31m"
+    #define C_EXTEND_LOGGER_CRESET "\x1b[0m"
+    #define C_EXTEND_LOGGER_CYELLOW "\x1b[33m"
+    #define C_EXTEND_LOGGER_CPURPLE "\x1b[35m"
 
-    #define LIBC_EXT_LOGGER_INFO_STR "INFO"
-    #define LIBC_EXT_LOGGER_WARNING_STR "WARNING"
-    #define LIBC_EXT_LOGGER_ERROR_STR "ERROR"
+    #define C_EXTEND_LOGGER_INFO_STR "INFO"
+    #define C_EXTEND_LOGGER_WARNING_STR "WARNING"
+    #define C_EXTEND_LOGGER_ERROR_STR "ERROR"
 
-    #define LIBC_EXT_LOGGER_ANSI_FMT_EXTRA 15
-    #define LIBC_EXT_LOGGER_MAX_FORMAT_SIZE 2048
+    #define C_EXTEND_LOGGER_ANSI_FMT_EXTRA 15
+    #define C_EXTEND_LOGGER_MAX_FORMAT_SIZE 2048
 
 typedef struct {
     const char *type_str;
     const char *type_color;
     FILE *type_stream;
-} libc_ext_logger_type_infos_t;
+} c_extend_logger_type_infos_t;
 
-#endif /* !LIBC_EXT_LOGGER_INTERNAL_H_ */
+#endif /* !C_EXTEND_LOGGER_INTERNAL_H_ */

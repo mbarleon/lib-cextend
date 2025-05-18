@@ -5,8 +5,8 @@
 ** exception
 */
 
-#ifndef LIBC_EXT_EXCEPTION_H_
-    #define LIBC_EXT_EXCEPTION_H_
+#ifndef C_EXTEND_EXCEPTION_H_
+    #define C_EXTEND_EXCEPTION_H_
     #include "../src/exception/exception.h"
     #include "../src/exception/exception_types.h"
 
@@ -18,4 +18,4 @@
     #define END_TRY __END_TRY
     #define THROW(code) __THROW__(code)
 
-#endif /* !LIBC_EXT_EXCEPTION_H_ */
+#endif /* !C_EXTEND_EXCEPTION_H_ */

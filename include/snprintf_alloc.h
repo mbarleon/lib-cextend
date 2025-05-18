@@ -5,11 +5,11 @@
 ** snprintf_alloc
 */
 
-#ifndef LIBC_EXT_SNPRINTF_ALLOC_H_
-    #define LIBC_EXT_SNPRINTF_ALLOC_H_
+#ifndef C_EXTEND_SNPRINTF_ALLOC_H_
+    #define C_EXTEND_SNPRINTF_ALLOC_H_
     #include <stdarg.h>
 
 char *snprintf_alloc(const char *restrict format, ...);
 char *vsnprintf_alloc(const char *restrict format, const va_list args);
 
-#endif /* !LIBC_EXT_SNPRINTF_ALLOC_H_ */
+#endif /* !C_EXTEND_SNPRINTF_ALLOC_H_ */

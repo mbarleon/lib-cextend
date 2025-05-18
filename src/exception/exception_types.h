@@ -10,23 +10,23 @@
     #include <setjmp.h>
     #include <stdbool.h>
 
-    #define __LIBC_EXT_EXCEPTION_CONTEXT_ALIGNMENT 16
+    #define __C_EXTEND_EXCEPTION_CONTEXT_ALIGNMENT 16
 
 typedef enum {
-    LIBC_EXT_EXCEPTION_OK = 0,
+    C_EXTEND_EXCEPTION_OK = 0,
 
-    LIBC_EXT_EXCEPTION_BAD_ARGS,
-    LIBC_EXT_EXCEPTION_BAD_ALLOC,
+    C_EXTEND_EXCEPTION_BAD_ARGS,
+    C_EXTEND_EXCEPTION_BAD_ALLOC,
 
-    LIBC_EXT_EXCEPTION_MAX
-} libc_ext_exception_types_t;
+    C_EXTEND_EXCEPTION_MAX
+} c_extend_exception_types_t;
 
-struct __attribute__((aligned(__LIBC_EXT_EXCEPTION_CONTEXT_ALIGNMENT)))
-    libc_ext_exception_context_s {
+struct __attribute__((aligned(__C_EXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
+    c_extend_exception_context_s {
     sigjmp_buf __env;
     void *__internals;
 };
 
-typedef struct libc_ext_exception_context_s libc_ext_exception_context_t;
+typedef struct c_extend_exception_context_s c_extend_exception_context_t;
 
 #endif /* !EXCEPTION_TYPES_H_ */
