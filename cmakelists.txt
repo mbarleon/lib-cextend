@@ -1,0 +1,121 @@
+cmake_minimum_required(VERSION 3.16)
+project(cextended VERSION 1.0)
+
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O3")
+
+########################################
+# INFO: enable multithreading for build
+########################################
+include(ProcessorCount)
+ProcessorCount(N)
+if(NOT N EQUAL 0)
+    set(CMAKE_BUILD_PARALLEL_LEVEL ${N})
+endif()
+
+########################################
+# INFO: CMake cache management for faster builds
+########################################
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+########################################
+
+file(GLOB LOGGER_SOURCE src/logger/*.c)
+file(GLOB EXCEPTION_SOURCE src/exception/*.c)
+file(GLOB SNPRINTF_ALLOC_SOURCE src/snprintf_alloc/*.c)
+
+add_library(cextended SHARED
+    ${LOGGER_SOURCE}
+    ${EXCEPTION_SOURCE}
+    ${SNPRINTF_ALLOC_SOURCE}
+)
+
+target_compile_options(cextended PRIVATE
+    # INFO: classic yutsu warnings
+    -Wall
+    -Wextra
+    -Werror
+    -pedantic
+
+    # INFO: type safety & conversions
+    -Wconversion
+    -Wsign-conversion
+    -Wfloat-equal
+
+    # INFO: code correctness
+    -Wshadow
+    -Wnull-dereference
+    -Wundef
+    -Wuninitialized
+    -Winit-self
+    -Wredundant-decls
+
+    # INFO: code hygiene
+    -Wcast-align
+    -Wcast-qual
+    -Wmissing-declarations
+
+    # INFO: logic bugs & bad practices
+    -Wswitch-default
+    -Wswitch-enum
+
+    # INFO: prevent common portability issues
+    -Wdouble-promotion
+    -Wwrite-strings
+
+    # INFO: disabling this because this causes a compilation error
+    -Wno-gnu-zero-variadic-macro-arguments
+    -Wno-format-truncation
+)
+
+add_custom_command(TARGET cextended POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/libs
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:cextended> ${CMAKE_SOURCE_DIR}/libs
+    COMMENT "Copying shared library to ./libs"
+)
+
+########################################
+
+option(ENABLE_DEBUG "Enable debug definition" OFF)
+
+if(ENABLE_DEBUG)
+    target_compile_definitions(cextended PRIVATE DEBUG=1)
+endif()
+
+########################################
+
+file(GLOB TEST_SOURCE
+    "tests/*.c")
+
+add_executable(unit_tests
+    ${TEST_SOURCE}
+    ${LOGGER_SOURCE}
+    ${EXCEPTION_SOURCE}
+    ${SNPRINTF_ALLOC_SOURCE}
+)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang")
+    target_compile_options(unit_tests PRIVATE -fprofile-instr-generate -fcoverage-mapping)
+    target_link_options(unit_tests PRIVATE -fprofile-instr-generate -fcoverage-mapping)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(unit_tests PRIVATE -fprofile-arcs -ftest-coverage)
+    target_link_options(unit_tests PRIVATE -fprofile-arcs -ftest-coverage)
+endif()
+
+target_compile_definitions(unit_tests PRIVATE UNIT_TESTS=1)
+
+target_link_libraries(unit_tests PRIVATE criterion sfml-graphics sfml-system sfml-window)
+
+target_include_directories(unit_tests PRIVATE ${CMAKE_SOURCE_DIR}/include)
+
+enable_testing()
+add_test(NAME unit_tests COMMAND unit_tests)
+
+add_custom_target(tests_run
+    COMMAND unit_tests
+    DEPENDS unit_tests
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+)

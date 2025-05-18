@@ -1,0 +1,15 @@
+/*
+** EPITECH PROJECT, 2025
+** libc-extension
+** File description:
+** snprintf_alloc
+*/
+
+#ifndef __LIBC_EXT_SNPRINTF_ALLOC_H_
+    #define __LIBC_EXT_SNPRINTF_ALLOC_H_
+    #include <stdarg.h>
+
+char *snprintf_alloc(const char *restrict format, ...);
+char *vsnprintf_alloc(const char *restrict format, va_list args);
+
+#endif /* !__LIBC_EXT_SNPRINTF_ALLOC_H_ */
