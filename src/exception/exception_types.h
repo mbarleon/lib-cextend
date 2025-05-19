@@ -9,6 +9,7 @@
     #define EXCEPTION_TYPES_H_
     #include <setjmp.h>
     #include <stdbool.h>
+    #include "../../include/types.h"
 
     #define __C_EXTEND_EXCEPTION_CONTEXT_ALIGNMENT 16
 
@@ -24,12 +25,11 @@ typedef enum {
 struct __attribute__((aligned(__C_EXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
     c_extend_exception_context_s {
     sigjmp_buf __env;
-    void *__internals;
+    c_extend_private_t __internals;
 };
 
 typedef struct c_extend_exception_context_s c_extend_exception_context_t;
 
-typedef volatile int vint_t;
 typedef vint_t c_extend_exception_code_t;
 
 #endif /* !EXCEPTION_TYPES_H_ */
