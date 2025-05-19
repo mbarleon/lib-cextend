@@ -25,10 +25,12 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 file(GLOB LOGGER_SOURCE src/logger/*.c)
 file(GLOB EXCEPTION_SOURCE src/exception/*.c)
+file(GLOB_RECURSE MEMORY_SOURCE src/memory/*.c)
 file(GLOB SNPRINTF_ALLOC_SOURCE src/snprintf_alloc/*.c)
 
 add_library(cextended SHARED
     ${LOGGER_SOURCE}
+    ${MEMORY_SOURCE}
     ${EXCEPTION_SOURCE}
     ${SNPRINTF_ALLOC_SOURCE}
 )
@@ -93,6 +95,7 @@ file(GLOB TEST_SOURCE
 add_executable(unit_tests
     ${TEST_SOURCE}
     ${LOGGER_SOURCE}
+    ${MEMORY_SOURCE}
     ${EXCEPTION_SOURCE}
     ${SNPRINTF_ALLOC_SOURCE}
 )

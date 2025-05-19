@@ -10,6 +10,7 @@
 
     #define UNUSED __attribute__((unused))
     #define CLEANUP(func) __attribute__((cleanup(func)))
+    #define DTOR(priority) __attribute__((destructor(priority)))
     #define CTOR(priority) __attribute__((constructor(priority)))
 
 #endif /* !C_EXTEND_MACRO_H_ */
