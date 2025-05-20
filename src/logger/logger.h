@@ -22,12 +22,12 @@ void logger_off(UNUSED cextend_log_type_t type,
 
 
     #if defined(DEBUG)
-        #define __LC_EXT_LOG logger
+        #define __CEXT_LOG logger
     #else
-        #define __LC_EXT_LOG logger_off
+        #define __CEXT_LOG logger_off
     #endif
 
-    #define __LC_EXT_PRT logger
+    #define __CEXT_PRT logger
     #define __CEXTEND_INIT_LOG init_logger()
 
 #endif /* !__CEXTEND_LOGGER_H_ */
