@@ -7,8 +7,8 @@
 
 #ifndef C_EXTEND_EXCEPTION_H_
     #define C_EXTEND_EXCEPTION_H_
-    #include "../src/exception/exception.h"
-    #include "../src/exception/exception_types.h"
+    #include "exception/exception.h"
+    #include "exception/exception_types.h"
 
     #define INIT_TRY __INIT_TRY
     #define TRY(code, ctxt) __TRY(code, ctxt)

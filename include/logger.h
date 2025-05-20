@@ -7,7 +7,7 @@
 
 #ifndef C_EXTEND_LOGGER_H_
     #define C_EXTEND_LOGGER_H_
-    #include "../src/logger/logger.h"
+    #include "logger/logger.h"
 
     #define C_EXTEND_INIT_LOG __C_EXTEND_INIT_LOG
     #define C_EXTEND_LOG(type, fmt, ...) __LC_EXT_LOG(type, fmt, ##__VA_ARGS__)
