@@ -51,3 +51,4 @@ build_main.sh
 build/
 !cmakelists.txt
 *.dylib
+a.out.dSYM/

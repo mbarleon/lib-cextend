@@ -58,7 +58,8 @@ void *safe_palloc(void *ptr, size_t size, void (*dtor)(void *),
     return new_ptr;
 }
 
-void safe_free(void *ptr)
+void safe_free(void **ptr)
 {
     remove_from_list(ptr);
+    *ptr = NULL;
 }

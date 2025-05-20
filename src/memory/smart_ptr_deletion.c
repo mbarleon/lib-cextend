@@ -28,14 +28,14 @@ void free_smart_ptr(void *ptr)
     free(my_ptr);
 }
 
-void release_smart_ptr(smart_ptr_t *ptr)
+void release_smart_ptr(smart_ptr_t **ptr)
 {
     smart_ptr_internal_t *internals;
 
-    if (!ptr || !ptr->__internals) {
+    if (!ptr || !*ptr || !(*ptr)->__internals) {
         return;
     }
-    internals = (smart_ptr_internal_t *)ptr->__internals;
+    internals = (smart_ptr_internal_t *)(*ptr)->__internals;
     if (internals->use_count <= 0) {
         return;
     }
@@ -43,9 +43,11 @@ void release_smart_ptr(smart_ptr_t *ptr)
     if (internals->use_count == 0) {
         destroy_smart_ptr(ptr);
     }
+    *ptr = NULL;
 }
 
-void destroy_smart_ptr(smart_ptr_t *ptr)
+void destroy_smart_ptr(smart_ptr_t **ptr)
 {
     remove_from_list(ptr);
+    *ptr = NULL;
 }
