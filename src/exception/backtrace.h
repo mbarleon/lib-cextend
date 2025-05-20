@@ -17,8 +17,10 @@
 
     #if defined(__APPLE__)
         #define __CEXTEND_BT_NPTRS_SUB 1
+        #define __CEXTEND_BT_NPTRS_MIN 3
     #else
         #define __CEXTEND_BT_NPTRS_SUB 3
+        #define __CEXTEND_BT_NPTRS_MIN 1
     #endif
 
     #include <dlfcn.h>
