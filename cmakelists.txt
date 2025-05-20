@@ -23,10 +23,23 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 ########################################
 
-file(GLOB LOGGER_SOURCE src/logger/*.c)
-file(GLOB EXCEPTION_SOURCE src/exception/*.c)
-file(GLOB_RECURSE MEMORY_SOURCE src/memory/*.c)
-file(GLOB SNPRINTF_ALLOC_SOURCE src/snprintf_alloc/*.c)
+file(GLOB LOGGER_SOURCE CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/logger/*.c")
+
+file(GLOB_RECURSE EXCEPTION_SOURCE CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/exception/*.c")
+
+file(GLOB_RECURSE MEMORY_SOURCE CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/memory/*.c")
+
+file(GLOB SNPRINTF_ALLOC_SOURCE CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/snprintf_alloc/*.c")
+
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang")
+    list(FILTER EXCEPTION_SOURCE EXCLUDE REGEX ".*/backtrace/linux/.*")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    list(FILTER EXCEPTION_SOURCE EXCLUDE REGEX ".*/backtrace/macos/.*")
+endif()
 
 add_library(cextend SHARED
     ${LOGGER_SOURCE}

@@ -11,7 +11,7 @@
     #include <string.h>
 
     #include "exception.h"
-    #include "backtrace.h"
+    #include "backtrace/backtrace.h"
     #include "exception_types.h"
     #include "../../include/logger.h"
 

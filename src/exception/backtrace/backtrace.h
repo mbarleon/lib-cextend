@@ -26,7 +26,7 @@
     #include <dlfcn.h>
     #include <execinfo.h>
 
-    #include "../../include/logger.h"
+    #include "../../../include/logger.h"
 
 void print_stacktrace(void);
 
