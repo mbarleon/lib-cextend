@@ -45,7 +45,6 @@ coding-style-reports.log
 # other files
 tiled/
 temp/
-entries/
 main.c
 build_main.sh
 build/
