@@ -62,3 +62,25 @@ smart_ptr_t *dup_smart_ptr(smart_ptr_t *ptr)
     memcpy(dup->ptr, ptr->ptr, internals->size);
     return dup;
 }
+
+void resize_smart_ptr(smart_ptr_t **ptr, size_t size)
+{
+    long long size_diff;
+    smart_ptr_internal_t *internals;
+
+    if (!ptr || !*ptr || !(*ptr)->__internals) {
+        THROW(C_EXTEND_EXCEPTION_BAD_ALLOC);
+    }
+    internals = (smart_ptr_internal_t *)(*ptr)->__internals;
+    size_diff = (long long)size - (long long)internals->size;
+    (*ptr)->ptr = realloc((*ptr)->ptr, size);
+    if (!(*ptr)->ptr) {
+        destroy_smart_ptr(ptr);
+        throw(C_EXTEND_EXCEPTION_BAD_ALLOC);
+    }
+    if (size_diff > 0) {
+        memset(&((uint8_t *)(*ptr)->ptr)[internals->size], 0,
+            (size_t)size_diff);
+    }
+    internals->size = size;
+}

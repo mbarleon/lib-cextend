@@ -30,5 +30,6 @@ smart_ptr_t *create_smart_ptr(size_t size, void (*dtor)(void *));
 void destroy_smart_ptr(smart_ptr_t **ptr);
 
 smart_ptr_t *dup_smart_ptr(smart_ptr_t *ptr);
+void resize_smart_ptr(smart_ptr_t **ptr, size_t size);
 
 #endif /* !__C_EXTEND_MEMORY_H_ */
