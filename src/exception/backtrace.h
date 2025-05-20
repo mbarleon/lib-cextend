@@ -8,7 +8,7 @@
 #ifndef CEXTEND_BACKTRACE_H_
     #define CEXTEND_BACKTRACE_H_
 
-    #define __CEXTEND_STACKTRACE_SIZE 64
+    #define __CEXTEND_STACKTRACE_SIZE 256
 
     #if !defined(_GNU_SOURCE)
         #define _GNU_SOURCE
