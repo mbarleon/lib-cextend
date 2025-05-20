@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2025
 ** libc-extension
 ** File description:
-** heap_infos
+** heap
 */
 
 #include "memory_internal.h"
