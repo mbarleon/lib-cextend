@@ -65,6 +65,11 @@ static void check_stack(const c_extend_exception_context_t *ctxt,
     abort();
 }
 
+static bool catch_code_helper(int code, int expected, int min, int max)
+{
+    return expected == min && code >= min && code <= max;
+}
+
 c_extend_exception_context_t *init_try(void)
 {
     c_extend_exception_context_t *ctxt = (c_extend_exception_context_t *)
@@ -114,6 +119,27 @@ void throw(int code)
     }
     internal->__was_used = true;
     siglongjmp(ctxt->__env, code);
+}
+
+bool catch_code(int code, int expected)
+{
+    if (catch_code_helper(code, expected, C_EXTEND_EXCEPTION,
+        C_EXTEND_EXCEPTION_MAX)) {
+        return true;
+    }
+    if (catch_code_helper(code, expected, C_EXTEND_EXCEPTION_LOGIC_ERROR,
+        C_EXTEND_EXCEPTION_LOGIC_ERROR_MAX)) {
+        return true;
+    }
+    if (catch_code_helper(code, expected, C_EXTEND_EXCEPTION_RUNTIME_ERROR,
+        C_EXTEND_EXCEPTION_RUNTIME_ERROR_MAX)) {
+        return true;
+    }
+    if (catch_code_helper(code, expected, C_EXTEND_EXCEPTION_BAD_ALLOC,
+        C_EXTEND_EXCEPTION_BAD_ALLOC_MAX)) {
+        return true;
+    }
+    return code == expected;
 }
 
 void catch_end(const int code)
