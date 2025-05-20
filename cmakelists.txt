@@ -35,6 +35,12 @@ add_library(cextend SHARED
     ${SNPRINTF_ALLOC_SOURCE}
 )
 
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_link_libraries(cextend PRIVATE dl)
+endif()
+
+target_link_options(cextend PRIVATE -rdynamic)
+
 target_compile_options(cextend PRIVATE
     # INFO: classic yutsu warnings
     -Wall

@@ -1,0 +1,34 @@
+/*
+** EPITECH PROJECT, 2025
+** lib-cextend
+** File description:
+** backtrace
+*/
+
+#ifndef CEXTEND_BACKTRACE_H_
+    #define CEXTEND_BACKTRACE_H_
+
+    #define __CEXTEND_STACKTRACE_SIZE 64
+
+    #ifndef _GNU_SOURCE
+        #define _GNU_SOURCE
+        #define __CEXTEND_BT_DEFINE_GNU_SOURCE
+    #endif
+
+    #ifdef __APPLE__
+        #define __CEXTEND_BT_NPTRS_SUB 1
+    #else
+        #define __CEXTEND_BT_NPTRS_SUB 3
+    #endif
+
+    #include <dlfcn.h>
+    #include <execinfo.h>
+
+    #include "../../include/logger.h"
+
+void print_stacktrace(void);
+
+    #ifdef __CEXTEND_BT_DEFINE_GNU_SOURCE
+        #undef _GNU_SOURCE
+    #endif
+#endif /* !CEXTEND_BACKTRACE_H_ */

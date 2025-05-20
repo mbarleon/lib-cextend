@@ -7,22 +7,6 @@
 
 #include "exception_internal.h"
 
-static void print_stacktrace(void)
-{
-    void *buffer[__CEXTEND_STACKTRACE_SIZE];
-    int nptrs = backtrace(buffer, __CEXTEND_STACKTRACE_SIZE);
-    char **symbols = backtrace_symbols(buffer, nptrs);
-
-    if (symbols == NULL) {
-        CEXTEND_LOG(LOG_ERROR, "backtrace symbols could not be loaded");
-        return;
-    }
-    for (int i = 0; i < nptrs; ++i) {
-        CEXTEND_PRT(LOG_ERROR, "%s", symbols[i]);
-    }
-    free(symbols);
-}
-
 static cextend_exception_context_t *get_exception_stack(
     cextend_exception_context_t *new, const bool fetch)
 {

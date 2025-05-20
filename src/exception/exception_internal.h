@@ -9,13 +9,11 @@
     #define CEXTEND_EXCEPTION_INTERNAL_H_
     #include <stdlib.h>
     #include <string.h>
-    #include <execinfo.h>
 
     #include "exception.h"
+    #include "backtrace.h"
     #include "exception_types.h"
     #include "../../include/logger.h"
-
-    #define __CEXTEND_STACKTRACE_SIZE 100
 
 struct __attribute__((aligned(__CEXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
     cextend_exception_internal_s {
