@@ -26,7 +26,7 @@ static void print_stacktrace(void)
         C_EXTEND_LOG(LOG_ERROR, "backtrace symbols could not be loaded");
         return;
     }
-    for (int i = 0; i < nptrs; i++) {
+    for (int i = 0; i < nptrs; ++i) {
         C_EXTEND_PRT(LOG_ERROR, "%s", symbols[i]);
     }
     free(symbols);
