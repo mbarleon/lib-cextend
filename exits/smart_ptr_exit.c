@@ -6,7 +6,7 @@
 */
 
 #include "exits.h"
-#include "../include/memory_exit.h"
+#include "../include/exit/memory_exit.h"
 
 DTOR(CEXTEND_FREE_MEM_EXIT)
 void c_extent_free_mem_exit(void)

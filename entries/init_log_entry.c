@@ -6,7 +6,7 @@
 */
 
 #include "entries.h"
-#include "../include/logger.h"
+#include "../include/entries/logger_init.h"
 
 CTOR(CEXTEND_INIT_LOG_ENTRY)
 void cextend_init_log_entry(void)

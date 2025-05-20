@@ -57,7 +57,9 @@ static void check_stack(const cextend_exception_context_t *ctxt,
     }
     is_aborting(true);
     print_stacktrace();
-    free_ptr_list();
+    if (should_free_on_abort(false) == true) {
+        free_ptr_list();
+    }
     abort();
 }
 

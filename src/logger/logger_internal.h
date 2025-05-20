@@ -16,6 +16,7 @@
     #include <pthread.h>
 
     #include "logger.h"
+    #include "logger_init.h"
 
     #define CEXTEND_LOGGER_CRED "\x1b[31m"
     #define CEXTEND_LOGGER_CRESET "\x1b[0m"

@@ -11,7 +11,8 @@
 
 typedef enum {
     CEXTEND_MIN_ENTRY = 101,
-    CEXTEND_INIT_LOG_ENTRY
+    CEXTEND_INIT_LOG_ENTRY,
+    CEXTEND_INIT_MEMORY_ENTRY
 } cextend_constructor_priotiries_t;
 
 #endif /* !CEXTEND_ENTRIES_H_ */

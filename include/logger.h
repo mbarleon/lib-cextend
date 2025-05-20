@@ -9,7 +9,6 @@
     #define CEXTEND_LOGGER_H_
     #include "logger/logger.h"
 
-    #define CEXTEND_INIT_LOG __CEXTEND_INIT_LOG
     #define CEXTEND_LOG(type, fmt, ...) __CEXT_LOG(type, fmt, ##__VA_ARGS__)
     #define CEXTEND_PRT(type, fmt, ...) __CEXT_PRT(type, fmt, ##__VA_ARGS__)
 

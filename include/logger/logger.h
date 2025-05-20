@@ -15,7 +15,6 @@ typedef enum {
     LOG_ERROR
 } cextend_log_type_t;
 
-void init_logger(void);
 void logger(cextend_log_type_t type, const char *restrict fmt, ...);
 void logger_off(UNUSED cextend_log_type_t type,
     UNUSED const char *restrict fmt, ...);
@@ -28,6 +27,5 @@ void logger_off(UNUSED cextend_log_type_t type,
     #endif
 
     #define __CEXT_PRT logger
-    #define __CEXTEND_INIT_LOG init_logger()
 
 #endif /* !__CEXTEND_LOGGER_H_ */
