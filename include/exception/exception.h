@@ -5,11 +5,11 @@
 ** exception
 */
 
-#ifndef __C_EXTEND_EXCEPTION_H_
-    #define __C_EXTEND_EXCEPTION_H_
+#ifndef __CEXTEND_EXCEPTION_H_
+    #define __CEXTEND_EXCEPTION_H_
     #include "exception_types.h"
 
-c_extend_exception_context_t *init_try(void);
+cextend_exception_context_t *init_try(void);
 void end_try(void);
 void throw(int code);
 bool catch_code(int code, int expected);
@@ -25,4 +25,4 @@ void catch_end(const int code);
     #define __END_TRY end_try()
     #define __THROW__(code) throw(code)
 
-#endif /* !__C_EXTEND_EXCEPTION_H_ */
+#endif /* !__CEXTEND_EXCEPTION_H_ */

@@ -5,10 +5,10 @@
 ** types
 */
 
-#ifndef C_EXTEND_TYPES_H_
-    #define C_EXTEND_TYPES_H_
+#ifndef CEXTEND_TYPES_H_
+    #define CEXTEND_TYPES_H_
 
 typedef volatile int vint_t;
-typedef void *c_extend_private_t;
+typedef void *cextend_private_t;
 
-#endif /* !C_EXTEND_TYPES_H_ */
+#endif /* !CEXTEND_TYPES_H_ */

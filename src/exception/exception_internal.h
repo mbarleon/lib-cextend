@@ -5,8 +5,8 @@
 ** exception_internal
 */
 
-#ifndef C_EXTEND_EXCEPTION_INTERNAL_H_
-    #define C_EXTEND_EXCEPTION_INTERNAL_H_
+#ifndef CEXTEND_EXCEPTION_INTERNAL_H_
+    #define CEXTEND_EXCEPTION_INTERNAL_H_
     #include <stdlib.h>
     #include <string.h>
     #include <execinfo.h>
@@ -15,14 +15,14 @@
     #include "exception_types.h"
     #include "../../include/logger.h"
 
-    #define __C_EXTEND_STACKTRACE_SIZE 100
+    #define __CEXTEND_STACKTRACE_SIZE 100
 
-struct __attribute__((aligned(__C_EXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
-    c_extend_exception_internal_s {
+struct __attribute__((aligned(__CEXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
+    cextend_exception_internal_s {
     bool __was_used;
-    c_extend_exception_context_t *__prev;
+    cextend_exception_context_t *__prev;
 };
 
-typedef struct c_extend_exception_internal_s c_extend_exception_internal_t;
+typedef struct cextend_exception_internal_s cextend_exception_internal_t;
 
-#endif /* !C_EXTEND_EXCEPTION_INTERNAL_H_ */
+#endif /* !CEXTEND_EXCEPTION_INTERNAL_H_ */

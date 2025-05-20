@@ -7,14 +7,14 @@
 
 #include "memory_internal.h"
 
-static c_extend_ptr_list_t **get_ptr_list(void)
+static cextend_ptr_list_t **get_ptr_list(void)
 {
-    static c_extend_ptr_list_t *ptr_list = NULL;
+    static cextend_ptr_list_t *ptr_list = NULL;
 
     return &ptr_list;
 }
 
-static void free_ptr_in_list(c_extend_ptr_list_t *elem, void *ptr)
+static void free_ptr_in_list(cextend_ptr_list_t *elem, void *ptr)
 {
     if (elem->dtor) {
         elem->dtor(ptr);
@@ -25,16 +25,16 @@ static void free_ptr_in_list(c_extend_ptr_list_t *elem, void *ptr)
 
 void add_in_list(void *ptr, void (*dtor)(void *))
 {
-    c_extend_ptr_list_t *tmp;
-    c_extend_ptr_list_t *entry;
-    c_extend_ptr_list_t **ptr_list = get_ptr_list();
+    cextend_ptr_list_t *tmp;
+    cextend_ptr_list_t *entry;
+    cextend_ptr_list_t **ptr_list = get_ptr_list();
 
     if (ptr == NULL) {
         return;
     }
-    entry = (c_extend_ptr_list_t *)calloc(1, sizeof(c_extend_ptr_list_t));
+    entry = (cextend_ptr_list_t *)calloc(1, sizeof(cextend_ptr_list_t));
     if (!entry) {
-        THROW(C_EXTEND_EXCEPTION_BAD_ALLOC);
+        THROW(CEXTEND_EXCEPTION_BAD_ALLOC);
     }
     entry->dtor = dtor;
     entry->ptr = ptr;
@@ -48,9 +48,9 @@ void add_in_list(void *ptr, void (*dtor)(void *))
 
 void remove_from_list(void *ptr)
 {
-    c_extend_ptr_list_t *tmp;
-    c_extend_ptr_list_t *prev = NULL;
-    c_extend_ptr_list_t **ptr_list = get_ptr_list();
+    cextend_ptr_list_t *tmp;
+    cextend_ptr_list_t *prev = NULL;
+    cextend_ptr_list_t **ptr_list = get_ptr_list();
 
     if (!ptr || !*ptr_list)
         return;
@@ -72,9 +72,9 @@ void remove_from_list(void *ptr)
 
 void free_ptr_list(void)
 {
-    c_extend_ptr_list_t *tmp;
-    c_extend_ptr_list_t *tmp2;
-    c_extend_ptr_list_t **ptr_list = get_ptr_list();
+    cextend_ptr_list_t *tmp;
+    cextend_ptr_list_t *tmp2;
+    cextend_ptr_list_t **ptr_list = get_ptr_list();
 
     if (!*ptr_list) {
         return;

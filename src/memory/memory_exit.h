@@ -5,9 +5,9 @@
 ** memory_exit
 */
 
-#ifndef __C_EXTEND_MEMORY_EXIT_H_
-    #define __C_EXTEND_MEMORY_EXIT_H_
+#ifndef __CEXTEND_MEMORY_EXIT_H_
+    #define __CEXTEND_MEMORY_EXIT_H_
 
 void free_ptr_list(void);
 
-#endif /* !__C_EXTEND_MEMORY_EXIT_H_ */
+#endif /* !__CEXTEND_MEMORY_EXIT_H_ */

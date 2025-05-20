@@ -5,19 +5,19 @@
 ** logger
 */
 
-#ifndef __C_EXTEND_LOGGER_H_
-    #define __C_EXTEND_LOGGER_H_
+#ifndef __CEXTEND_LOGGER_H_
+    #define __CEXTEND_LOGGER_H_
     #include "../../include/macro.h"
 
 typedef enum {
     LOG_INFO,
     LOG_WARNING,
     LOG_ERROR
-} c_extend_log_type_t;
+} cextend_log_type_t;
 
 void init_logger(void);
-void logger(c_extend_log_type_t type, const char *restrict fmt, ...);
-void logger_off(UNUSED c_extend_log_type_t type,
+void logger(cextend_log_type_t type, const char *restrict fmt, ...);
+void logger_off(UNUSED cextend_log_type_t type,
     UNUSED const char *restrict fmt, ...);
 
 
@@ -28,6 +28,6 @@ void logger_off(UNUSED c_extend_log_type_t type,
     #endif
 
     #define __LC_EXT_PRT logger
-    #define __C_EXTEND_INIT_LOG init_logger()
+    #define __CEXTEND_INIT_LOG init_logger()
 
-#endif /* !__C_EXTEND_LOGGER_H_ */
+#endif /* !__CEXTEND_LOGGER_H_ */

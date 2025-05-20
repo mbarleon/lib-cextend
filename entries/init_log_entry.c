@@ -8,8 +8,8 @@
 #include "entries.h"
 #include "../include/logger.h"
 
-CTOR(C_EXTEND_INIT_LOG_ENTRY)
-void c_extend_init_log_entry(void)
+CTOR(CEXTEND_INIT_LOG_ENTRY)
+void cextend_init_log_entry(void)
 {
-    C_EXTEND_INIT_LOG;
+    CEXTEND_INIT_LOG;
 }

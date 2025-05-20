@@ -7,7 +7,7 @@
 
 #include "exception_internal.h"
 
-static const char *c_extend_exception_desc[] = {
+static const char *cextend_exception_desc[] = {
     "exception",
 
     "logic_error",
@@ -47,8 +47,8 @@ static const char *c_extend_exception_desc[] = {
 
 const char *get_exception_str(const int code)
 {
-    if (code < C_EXTEND_EXCEPTION || code > C_EXTEND_EXCEPTION_MAX) {
-        return c_extend_exception_desc[C_EXTEND_EXCEPTION_BAD_EXCEPTION];
+    if (code < CEXTEND_EXCEPTION || code > CEXTEND_EXCEPTION_MAX) {
+        return cextend_exception_desc[CEXTEND_EXCEPTION_BAD_EXCEPTION];
     }
-    return c_extend_exception_desc[code];
+    return cextend_exception_desc[code];
 }

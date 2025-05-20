@@ -13,11 +13,11 @@
     #include "memory.h"
     #include "../../include/exception.h"
 
-typedef struct c_extend_ptr_list_s {
+typedef struct cextend_ptr_list_s {
     void *ptr;
     void (*dtor)(void *);
-    struct c_extend_ptr_list_s *next;
-} c_extend_ptr_list_t;
+    struct cextend_ptr_list_s *next;
+} cextend_ptr_list_t;
 
 void add_in_list(void *ptr, void (*dtor)(void *));
 void remove_from_list(void *ptr);

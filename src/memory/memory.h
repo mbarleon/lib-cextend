@@ -5,8 +5,8 @@
 ** memory
 */
 
-#ifndef __C_EXTEND_MEMORY_H_
-    #define __C_EXTEND_MEMORY_H_
+#ifndef __CEXTEND_MEMORY_H_
+    #define __CEXTEND_MEMORY_H_
     #include <stddef.h>
     #include "../../include/types.h"
 
@@ -20,7 +20,7 @@ void safe_free(void **ptr);
 
 typedef struct {
     void *ptr;
-    c_extend_private_t __internals;
+    cextend_private_t __internals;
 } smart_ptr_t;
 
 void release_smart_ptr(smart_ptr_t **ptr);
@@ -32,4 +32,4 @@ void destroy_smart_ptr(smart_ptr_t **ptr);
 smart_ptr_t *dup_smart_ptr(smart_ptr_t *ptr);
 void resize_smart_ptr(smart_ptr_t **ptr, size_t size);
 
-#endif /* !__C_EXTEND_MEMORY_H_ */
+#endif /* !__CEXTEND_MEMORY_H_ */

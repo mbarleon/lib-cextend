@@ -17,11 +17,11 @@ char *snprintf_alloc(const char *restrict format, ...)
     len = vsnprintf(NULL, 0, format, args);
     va_end(args);
     if (len < 0) {
-        THROW(C_EXTEND_EXCEPTION_INVALID_ARGUMENT);
+        THROW(CEXTEND_EXCEPTION_INVALID_ARGUMENT);
     }
     buffer = (char *)malloc(sizeof(char) * (size_t)(len + 1));
     if (!buffer) {
-        THROW(C_EXTEND_EXCEPTION_BAD_ALLOC);
+        THROW(CEXTEND_EXCEPTION_BAD_ALLOC);
     }
     va_start(args, format);
     vsnprintf(buffer, (size_t)(len + 1), format, args);
@@ -39,11 +39,11 @@ char *vsnprintf_alloc(const char *restrict format, va_list args)
     len = vsnprintf(NULL, 0, format, copy);
     va_end(copy);
     if (len < 0) {
-        THROW(C_EXTEND_EXCEPTION_LENGTH_ERROR);
+        THROW(CEXTEND_EXCEPTION_LENGTH_ERROR);
     }
     buffer = (char *)malloc(sizeof(char) * (size_t)(len + 1));
     if (!buffer) {
-        THROW(C_EXTEND_EXCEPTION_BAD_ALLOC);
+        THROW(CEXTEND_EXCEPTION_BAD_ALLOC);
     }
     va_copy(copy, args);
     vsnprintf(buffer, (size_t)(len + 1), format, copy);

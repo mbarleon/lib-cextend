@@ -2,16 +2,16 @@
 ** EPITECH PROJECT, 2025
 ** coding-style-war-crimes
 ** File description:
-** c_extend_log_init_entry
+** cextend_log_init_entry
 */
 
-#ifndef C_EXTEND_EXITS_H_
-    #define C_EXTEND_EXITS_H_
+#ifndef CEXTEND_EXITS_H_
+    #define CEXTEND_EXITS_H_
     #include "../include/macro.h"
 
 typedef enum {
-    C_EXTEND_MIN_EXIT = 101,
-    C_EXTEND_FREE_MEM_EXIT
-} c_extend_destructor_priotiries_t;
+    CEXTEND_MIN_EXIT = 101,
+    CEXTEND_FREE_MEM_EXIT
+} cextend_destructor_priotiries_t;
 
-#endif /* !C_EXTEND_EXITS_H_ */
+#endif /* !CEXTEND_EXITS_H_ */
