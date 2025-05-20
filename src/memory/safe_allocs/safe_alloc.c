@@ -16,3 +16,11 @@ void *safe_valloc(size_t size, void (*dtor)(void *))
 {
     return safe_alloc(size, dtor, &valloc);
 }
+
+void *safe_strdup(const char *restrict str)
+{
+    void *ptr = safe_alloc(sizeof(char) * (strlen(str) + 1), NULL, &malloc);
+
+    strcpy((char *)ptr, str);
+    return ptr;
+}

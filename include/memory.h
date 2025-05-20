@@ -10,6 +10,7 @@
     #include "types.h"
     #include <stddef.h>
 
+void *safe_strdup(const char *restrict str);
 void *safe_calloc(size_t count, size_t size, void (*dtor)(void *));
 void *safe_malloc(size_t size, void (*dtor)(void *));
 void *safe_realloc(void *ptr, size_t size, void (*dtor)(void *));

@@ -5,7 +5,7 @@
 ** backtrace
 */
 
-#include "../backtrace.h"
+#include "backtrace_linux.h"
 
 void print_stacktrace(void)
 {
@@ -18,7 +18,7 @@ void print_stacktrace(void)
         if (dladdr(buffer[i], &info)) {
             CEXTEND_PRT(LOG_ERROR, "    %s %p: %s (%s)",
                 i == __CEXTEND_BT_NPTRS_MIN ? "at" : "by", buffer[i],
-                info.dli_sname ? info.dli_sname : "???",
+                info.dli_fname ? do_nm(buffer[i], info.dli_fname) : "???",
                 info.dli_fname ? info.dli_fname : "???");
         } else {
             CEXTEND_PRT(LOG_ERROR, "    %s %p: [no symbol info]",

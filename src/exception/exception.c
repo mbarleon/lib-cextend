@@ -18,6 +18,16 @@ static cextend_exception_context_t *get_exception_stack(
     return exception_stack;
 }
 
+static bool is_aborting(const bool val)
+{
+    static bool is_aborting = false;
+
+    if (val == true) {
+        is_aborting = true;
+    }
+    return is_aborting;
+}
+
 static void *init_internals(void)
 {
     cextend_exception_internal_t *internal = (cextend_exception_internal_t *)
@@ -45,7 +55,9 @@ static void check_stack(const cextend_exception_context_t *ctxt,
     } else {
         CEXTEND_PRT(LOG_ERROR, "Exception stack was illegaly modified");
     }
+    is_aborting(true);
     print_stacktrace();
+    free_ptr_list();
     abort();
 }
 
@@ -93,6 +105,9 @@ void throw(int code)
     cextend_exception_internal_t *internal = ctxt ?
         (cextend_exception_internal_t *)ctxt->__internals : NULL;
 
+    if (is_aborting(false) == true) {
+        abort();
+    }
     check_stack(ctxt, code);
     if (internal->__was_used == true) {
         end_try();

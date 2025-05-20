@@ -11,9 +11,10 @@
     #include <string.h>
 
     #include "exception.h"
-    #include "backtrace/backtrace.h"
     #include "exception_types.h"
+    #include "backtrace/backtrace.h"
     #include "../../include/logger.h"
+    #include "../../include/memory_exit.h"
 
 struct __attribute__((aligned(__CEXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
     cextend_exception_internal_s {
