@@ -10,12 +10,12 @@
 
     #define __CEXTEND_STACKTRACE_SIZE 64
 
-    #ifndef _GNU_SOURCE
+    #if !defined(_GNU_SOURCE)
         #define _GNU_SOURCE
         #define __CEXTEND_BT_DEFINE_GNU_SOURCE
     #endif
 
-    #ifdef __APPLE__
+    #if defined(__APPLE__)
         #define __CEXTEND_BT_NPTRS_SUB 1
     #else
         #define __CEXTEND_BT_NPTRS_SUB 3
@@ -28,7 +28,7 @@
 
 void print_stacktrace(void);
 
-    #ifdef __CEXTEND_BT_DEFINE_GNU_SOURCE
+    #if defined(__CEXTEND_BT_DEFINE_GNU_SOURCE)
         #undef _GNU_SOURCE
     #endif
 #endif /* !CEXTEND_BACKTRACE_H_ */
