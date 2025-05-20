@@ -25,11 +25,11 @@ function _all()
     mkdir -p build
     cd build || _error "mkdir failed"
     cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
-    if make -j"$(nproc)" cextended; then
-        _success "compiled cextended"
+    if make -j"$(nproc)" cextend; then
+        _success "compiled cextend"
         exit 0
     fi
-    _error "compilation error" "failed to compile cextended"
+    _error "compilation error" "failed to compile cextend"
 }
 
 function _debug()
@@ -41,11 +41,11 @@ function _debug()
     mkdir -p build
     cd build || _error "mkdir failed"
     cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DENABLE_DEBUG=ON
-    if make -j"$(nproc)" cextended; then
-        _success "compiled cextended"
+    if make -j"$(nproc)" cextend; then
+        _success "compiled cextend"
         exit 0
     fi
-    _error "compilation error" "failed to compile cextended"
+    _error "compilation error" "failed to compile cextend"
 }
 
 function _tests_run()
@@ -82,8 +82,8 @@ function _clean()
 function _fclean()
 {
     _clean
-    rm -rf cextended unit_tests plugins code_coverage.txt unit_tests-*.profraw unit_tests.profdata \
-    libs/libcextended.* vgcore* cmake-build-debug a.out
+    rm -rf cextend unit_tests plugins code_coverage.txt unit_tests-*.profraw unit_tests.profdata \
+    libs/libcextend.* vgcore* cmake-build-debug a.out
 }
 
 for args in "$@"
@@ -92,7 +92,7 @@ do
         -h|--help)
             cat << EOF
 USAGE:
-      $0    builds cextended project
+      $0    builds cextend project
 
 ARGUMENTS:
       $0 [-h|--help]    displays this message

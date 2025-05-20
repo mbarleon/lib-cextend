@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(cextended VERSION 1.0)
+project(cextend VERSION 1.0)
 
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -28,14 +28,14 @@ file(GLOB EXCEPTION_SOURCE src/exception/*.c)
 file(GLOB_RECURSE MEMORY_SOURCE src/memory/*.c)
 file(GLOB SNPRINTF_ALLOC_SOURCE src/snprintf_alloc/*.c)
 
-add_library(cextended SHARED
+add_library(cextend SHARED
     ${LOGGER_SOURCE}
     ${MEMORY_SOURCE}
     ${EXCEPTION_SOURCE}
     ${SNPRINTF_ALLOC_SOURCE}
 )
 
-target_compile_options(cextended PRIVATE
+target_compile_options(cextend PRIVATE
     # INFO: classic yutsu warnings
     -Wall
     -Wextra
@@ -73,9 +73,9 @@ target_compile_options(cextended PRIVATE
     -Wno-format-truncation
 )
 
-add_custom_command(TARGET cextended POST_BUILD
+add_custom_command(TARGET cextend POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/libs
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:cextended> ${CMAKE_SOURCE_DIR}/libs
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:cextend> ${CMAKE_SOURCE_DIR}/libs
     COMMENT "Copying shared library to ./libs"
 )
 
@@ -84,7 +84,7 @@ add_custom_command(TARGET cextended POST_BUILD
 option(ENABLE_DEBUG "Enable debug definition" OFF)
 
 if(ENABLE_DEBUG)
-    target_compile_definitions(cextended PRIVATE DEBUG=1)
+    target_compile_definitions(cextend PRIVATE DEBUG=1)
 endif()
 
 ########################################
