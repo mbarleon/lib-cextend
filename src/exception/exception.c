@@ -7,15 +7,6 @@
 
 #include "exception_internal.h"
 
-static const char *c_extend_exception_description[] = {
-    "no exception",
-
-    "bad arguments",
-    "bad alloc",
-
-    "unknown exception"
-};
-
 static void print_stacktrace(void)
 {
     void *buffer[__C_EXTEND_STACKTRACE_SIZE];
@@ -41,14 +32,6 @@ static c_extend_exception_context_t *get_exception_stack(
         exception_stack = new;
     }
     return exception_stack;
-}
-
-const char *get_exception_str(const int code)
-{
-    if (code < C_EXTEND_EXCEPTION_OK || code > C_EXTEND_EXCEPTION_MAX) {
-        return c_extend_exception_description[C_EXTEND_EXCEPTION_MAX];
-    }
-    return c_extend_exception_description[code];
 }
 
 static void *init_internals(void)
