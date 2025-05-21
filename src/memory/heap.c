@@ -70,6 +70,8 @@ void remove_from_list(void *ptr)
     }
 }
 
+#include "../../include/logger.h"
+
 void free_ptr_list(void)
 {
     cextend_ptr_list_t *tmp;
@@ -90,4 +92,5 @@ void free_ptr_list(void)
         tmp = tmp->next;
         free(tmp2);
     }
+    *ptr_list = NULL;
 }
