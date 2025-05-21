@@ -173,7 +173,8 @@ LIST OF EXCEPTIONS
 ATTRIBUTES
 
 ┌───────────────────────────────────────────────────┬───────────────┬─────────┐
-│Interface                                          │ Attribute     │ Value   │       ├───────────────────────────────────────────────────┼───────────────┼─────────┤
+│Interface                                          │ Attribute     │ Value   │
+├───────────────────────────────────────────────────┼───────────────┼─────────┤
 │INIT_TRY, TRY, CATCH, CATCH_ALL, CATCH_END,        │               │         │
 │END_TRY, THROW, should_free_on_abort               │ Thread safety │ MT-Safe │
 │                                                   │               │         │
