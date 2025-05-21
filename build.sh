@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CMAKE_SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BOLD="\033[1m"
 GREEN="\033[1;32m"
 RED="\033[1;31m"
 ILC="\033[3m"
@@ -24,7 +26,7 @@ function _all()
     _success "command 'cmake' found, building..."
     mkdir -p build
     cd build || _error "mkdir failed"
-    cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+    cmake "${CMAKE_SOURCE_DIR}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
     if make -j"$(nproc)" cextend; then
         _success "compiled cextend"
         exit 0
@@ -40,7 +42,7 @@ function _debug()
     _success "command 'cmake' found, building..."
     mkdir -p build
     cd build || _error "mkdir failed"
-    cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DENABLE_DEBUG=ON
+    cmake "${CMAKE_SOURCE_DIR}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DENABLE_DEBUG=ON
     if make -j"$(nproc)" cextend; then
         _success "compiled cextend"
         exit 0
@@ -56,7 +58,7 @@ function _tests_run()
     _success "command 'cmake' found, building..."
     mkdir -p build
     cd build || _error "mkdir failed"
-    cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
+    cmake "${CMAKE_SOURCE_DIR}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
     if ! make -j"$(nproc)" unit_tests; then
         _error "unit tests compilation error" "failed to compile unit_tests"
     fi
@@ -92,14 +94,14 @@ do
         -h|--help)
             cat << EOF
 USAGE:
-      $0    builds cextend project
+    $0    builds cextend project
 
 ARGUMENTS:
-      $0 [-h|--help]    displays this message
-      $0 [-d|--debug]   debug flags compilation
-      $0 [-c|--clean]   clean the project
-      $0 [-f|--fclean]  fclean the project
-      $0 [-t|--tests]   run unit tests
+    $0 [-h|--help]    displays this message
+    $0 [-d|--debug]   debug flags compilation
+    $0 [-c|--clean]   clean the project
+    $0 [-f|--fclean]  fclean the project
+    $0 [-t|--tests]   run unit tests
 EOF
         exit 0
         ;;

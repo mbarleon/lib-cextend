@@ -87,8 +87,11 @@ target_compile_options(cextend PRIVATE
 
     # INFO: disabling this because this causes a compilation error
     -Wno-gnu-zero-variadic-macro-arguments
-    -Wno-format-truncation
 )
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_compile_options(cextend PRIVATE -Wno-format-truncation)
+endif()
 
 add_custom_command(TARGET cextend POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_SOURCE_DIR}/libs
