@@ -7,7 +7,7 @@
 
 #ifndef __CEXTEND_LOGGER_H_
     #define __CEXTEND_LOGGER_H_
-    #include "../../include/macro.h"
+    #include "../../include/cextend/macro.h"
 
 typedef enum {
     LOG_INFO,

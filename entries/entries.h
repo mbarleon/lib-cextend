@@ -7,7 +7,7 @@
 
 #ifndef CEXTEND_ENTRIES_H_
     #define CEXTEND_ENTRIES_H_
-    #include "../include/macro.h"
+    #include "../include/cextend/macro.h"
 
 typedef enum {
     CEXTEND_MIN_ENTRY = 101,

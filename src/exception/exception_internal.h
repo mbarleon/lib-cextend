@@ -14,8 +14,8 @@
     #include "exception_init.h"
     #include "exception_types.h"
     #include "backtrace/backtrace.h"
-    #include "../../include/logger.h"
-    #include "../../include/exit/memory_exit.h"
+    #include "../../include/cextend/logger.h"
+    #include "../../include/cextend/exit/memory_exit.h"
 
 struct __attribute__((aligned(__CEXTEND_EXCEPTION_CONTEXT_ALIGNMENT)))
     cextend_exception_internal_s {

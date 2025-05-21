@@ -6,7 +6,7 @@
 */
 
 #include "entries.h"
-#include "../include/entries/exception_init.h"
+#include "../include/cextend/entries/exception_init.h"
 
 CTOR(CEXTEND_INIT_MEMORY_ENTRY)
 void init_memory_entry(void)

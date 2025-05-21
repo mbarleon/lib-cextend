@@ -23,7 +23,7 @@
     #define __CEXTEND_NM_MAPPING_MAPS_PATH_LEN 64
 
     #include "nm.h"
-    #include "../../../../../include/memory.h"
+    #include "../../../../../include/cextend/memory.h"
 
 typedef struct cextend_nm_s {
     void *ptr;

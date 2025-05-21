@@ -11,7 +11,7 @@
     #include <stdint.h>
     #include <stdlib.h>
     #include "memory.h"
-    #include "../../include/exception.h"
+    #include "../../include/cextend/exception.h"
 
 typedef struct cextend_ptr_list_s {
     void *ptr;

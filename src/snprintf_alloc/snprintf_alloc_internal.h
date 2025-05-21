@@ -11,6 +11,6 @@
     #include <stdarg.h>
     #include <stdlib.h>
     #include "snprintf_alloc.h"
-    #include "../../include/exception.h"
+    #include "../../include/cextend/exception.h"
 
 #endif /* !CEXTEND_SNPRINTF_ALLOC_INTERNAL_H_ */

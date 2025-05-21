@@ -8,7 +8,7 @@
 #ifndef __CEXTEND_MEMORY_H_
     #define __CEXTEND_MEMORY_H_
     #include <stddef.h>
-    #include "../../include/types.h"
+    #include "../../include/cextend/types.h"
 
 void *safe_strdup(const char *restrict str);
 void *safe_calloc(size_t count, size_t size, void (*dtor)(void *));

@@ -9,7 +9,7 @@
     #define EXCEPTION_TYPES_H_
     #include <setjmp.h>
     #include <stdbool.h>
-    #include "../../include/types.h"
+    #include "../types.h"
 
     #define __CEXTEND_EXCEPTION_CONTEXT_ALIGNMENT 16
 

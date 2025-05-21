@@ -7,7 +7,7 @@
 
 #ifndef CEXTEND_EXITS_H_
     #define CEXTEND_EXITS_H_
-    #include "../include/macro.h"
+    #include "../include/cextend/macro.h"
 
 typedef enum {
     CEXTEND_MIN_EXIT = 101,
