@@ -10,7 +10,7 @@
 
     #define __CEXTEND_STACKTRACE_SIZE 256
 
-    #if !defined(_GNU_SOURCE)
+    #if !defined(_GNU_SOURCE) && defined(__linux__)
         #define _GNU_SOURCE
         #define __CEXTEND_BT_DEFINE_GNU_SOURCE
     #endif

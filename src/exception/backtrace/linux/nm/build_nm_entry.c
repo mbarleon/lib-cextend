@@ -38,9 +38,10 @@ void add_nm_symbol(const char *restrict fname, void *ptr, char type,
     file->contents = new_sym;
 }
 
-static void chose_elf(unsigned char *e_ident, const char *restrict fname,
-    void *map)
+static void chose_elf(const char *restrict fname, void *map)
 {
+    unsigned char *e_ident = (unsigned char *)map;
+
     if (e_ident[EI_CLASS] == ELFCLASS64)
         handle_elf64(fname, map);
     else if (e_ident[EI_CLASS] == ELFCLASS32)
@@ -51,7 +52,6 @@ void build_nm_entry(const char *restrict fname)
 {
     void *map;
     struct stat st;
-    unsigned char *e_ident;
     int fd = open(fname, O_RDONLY);
 
     if (fd < 0)
@@ -64,7 +64,6 @@ void build_nm_entry(const char *restrict fname)
     close(fd);
     if (map == MAP_FAILED)
         return;
-    e_ident = (unsigned char *)map;
-    chose_elf(e_ident, fname, map);
+    chose_elf(fname, map);
     munmap(map, (size_t)st.st_size);
 }

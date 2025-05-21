@@ -5,7 +5,8 @@
 ** backtrace
 */
 
-#include "backtrace_linux.h"
+#include "../backtrace.h"
+#include "nm/nm.h"
 
 void print_stacktrace(void)
 {
