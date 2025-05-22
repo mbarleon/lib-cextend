@@ -17,7 +17,7 @@ char *snprintf_alloc(const char *restrict format, ...)
     len = vsnprintf(NULL, 0, format, args);
     va_end(args);
     if (len < 0) {
-        THROW(CEXTEND_EXCEPTION_INVALID_ARGUMENT);
+        THROW(CEXTEND_EXCEPTION_LENGTH_ERROR);
     }
     buffer = (char *)malloc(sizeof(char) * (size_t)(len + 1));
     if (!buffer) {

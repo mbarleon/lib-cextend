@@ -338,7 +338,6 @@ EXAMPLE
         // ptr3 and ptr4 will be freed here.
     }
 ```
----
 
 ### Logger:
 
@@ -424,6 +423,43 @@ ATTRIBUTES
 ├───────────────────────────────────────────────────┼───────────────┼─────────┤
 │CEXTEND_LOG, CEXTEND_PRT, CEXTEND_INIT_LOG         │ Thread safety │ MT-Safe │
 └───────────────────────────────────────────────────┴───────────────┴─────────┘
+```
+
+### snprintf_alloc:
+
+```
+NAME
+    snprintf_alloc, vsnprintf_alloc - formats and stores output in a buffer
+SYNOPSIS
+    #include <cextend/snprintf_alloc.h>
+
+    char *snprintf_alloc(const char *restrict format, ...);
+
+    char *vsnprintf_alloc(const char *restrict format, const va_list args);
+
+DESCRIPTION
+    The snprintf_alloc function acts like snpritnf(3), except it returns an
+    allocated char pointer instead of taking into its arguments. It can throw
+    CEXTEND_EXCEPTION_LENGTH_ERROR or CEXTEND_EXCEPTION_BAD_ALLOC in case of an
+    error.
+
+    The vsnprintf_alloc function acts like vsnpritnf(3), except it returns an
+    allocated char pointer instead of taking into its arguments. It can throw
+    CEXTEND_EXCEPTION_LENGTH_ERROR or CEXTEND_EXCEPTION_BAD_ALLOC in case of an
+    error.
+
+EXAMPLE
+    #include <stdlib.h>
+    #include <cextend/snprintf_alloc.h>
+
+    int main(void)
+    {
+        char *str = snprintf_alloc("Test, %d", 42);
+
+        printf("%s\n", str);
+        free(str);
+        return 0;
+    }
 ```
 
 ---
