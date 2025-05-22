@@ -83,15 +83,17 @@ static bool get_format(cextend_logger_type_infos_t *infos,
     return true;
 }
 
-static void log_print(cextend_logger_type_infos_t *infos,
+static int log_print(cextend_logger_type_infos_t *infos,
     const char *restrict new_fmt, va_list args)
 {
+    int ret;
     pthread_mutex_t *logger_mtx = get_mtx();
 
     pthread_mutex_lock(logger_mtx);
-    vfprintf(infos->type_stream, new_fmt, args);
+    ret = vfprintf(infos->type_stream, new_fmt, args);
     fflush(infos->type_stream);
     pthread_mutex_unlock(logger_mtx);
+    return ret;
 }
 
 void init_logger(void)
@@ -100,19 +102,22 @@ void init_logger(void)
     is_logger_init(true);
 }
 
-void logger(const cextend_log_type_t type, const char *restrict fmt, ...)
+int logger(const cextend_log_type_t type, const char *restrict fmt, ...)
 {
+    int ret;
     va_list args;
     cextend_logger_type_infos_t infos;
     char new_fmt[CEXTEND_LOGGER_MAX_FORMAT_SIZE];
 
     get_format(&infos, type, fmt, new_fmt);
     va_start(args, fmt);
-    log_print(&infos, new_fmt, args);
+    ret = log_print(&infos, new_fmt, args);
     va_end(args);
+    return ret;
 }
 
-void logger_off(UNUSED cextend_log_type_t type,
+int logger_off(UNUSED cextend_log_type_t type,
     UNUSED const char *restrict fmt, ...)
 {
+    return 0;
 }

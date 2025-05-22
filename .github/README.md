@@ -340,6 +340,23 @@ EXAMPLE
 ```
 ---
 
+### Logger:
+
+```
+NAME
+
+SYNOPSIS
+
+DESCRIPTION
+
+EXAMPLE
+
+ATTRIBUTES
+
+```
+
+---
+
 ## WARNING
 
 Dear Epitech students, this library was developped in accordance with Epitech's C coding-style (as of 2025), as it was used in my own projects. However, using it directly in your projects may result in a grade penalty (e.g., -42). Use it with caution, and do not add it to your repository unless you have explicit approval from your local pedagogical staff.
