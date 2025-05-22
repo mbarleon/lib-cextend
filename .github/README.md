@@ -343,16 +343,87 @@ EXAMPLE
 ### Logger:
 
 ```
-NAME
+NAME CEXTEND_LOG, CEXTEND_PRT, CEXTEND_INIT_LOG - logger
 
 SYNOPSIS
+    #include <cextend/logger.h>
+
+    int CEXTEND_LOG(const cextend_log_type_t type,
+        const char *restrict fmt, ...)
+
+    int CEXTEND_PRT(const cextend_log_type_t type,
+        const char *restrict fmt, ...)
+
+    #include <cextend/entries/logger_init.h>
+
+    CEXTEND_INIT_LOG
 
 DESCRIPTION
+    The CEXTEND_LOG macro takes a type (LOG_INFO, LOG_WARNING, LOG_ERROR), a
+    format (see printf(3) for more informations) and optional variadic
+    arguments depending on the format. It returns the number of characters
+    printed. This macro will only print if DEBUG was defined before the
+    inclusion of the <cextend/logger.h> header.
+
+    The CEXTEND_PRT macro takes a type (LOG_INFO, LOG_WARNING, LOG_ERROR), a
+    format (see printf(3) for more informations) and optional variadic
+    arguments depending on the format. It returns the number of characters
+    printed.
+
+    The CEXTEND_INIT_LOG macro initializes the logger. It is recommended to
+    call this macro in a function with __attribute__((constructor)).
 
 EXAMPLE
+    #include <cextend/logger.h>
+    #include <cextend/entries/logger_init.h>
+
+    typedef enum {
+        CEXTEND_MIN_ENTRY = 101,
+        CEXTEND_INIT_LOG_ENTRY
+    } cextend_constructor_priotiries_t;
+
+    __attribute__((constructor(CEXTEND_INIT_LOG_ENTRY)))
+    void cextend_init_log_entry(void)
+    {
+        CEXTEND_INIT_LOG;
+    }
+
+    int main(void)
+    {
+        CEXTEND_LOG(LOG_ERROR, "This will not print!");
+        CEXTEND_PRT(LOG_INFO, "But this will [%d]!", 42);
+        return 0;
+    }
+
+EXAMPLE 2
+    #define DEBUG
+    #include <cextend/logger.h>
+    #include <cextend/entries/logger_init.h>
+
+    typedef enum {
+        CEXTEND_MIN_ENTRY = 101,
+        CEXTEND_INIT_LOG_ENTRY
+    } cextend_constructor_priotiries_t;
+
+    __attribute__((constructor(CEXTEND_INIT_LOG_ENTRY)))
+    void cextend_init_log_entry(void)
+    {
+        CEXTEND_INIT_LOG;
+    }
+
+    int main(void)
+    {
+        CEXTEND_LOG(LOG_ERROR, "This will print!");
+        CEXTEND_PRT(LOG_INFO, "This will too [%d]!", 42);
+        return 0;
+    }
 
 ATTRIBUTES
-
+┌───────────────────────────────────────────────────┬───────────────┬─────────┐
+│Interface                                          │ Attribute     │ Value   │
+├───────────────────────────────────────────────────┼───────────────┼─────────┤
+│CEXTEND_LOG, CEXTEND_PRT, CEXTEND_INIT_LOG         │ Thread safety │ MT-Safe │
+└───────────────────────────────────────────────────┴───────────────┴─────────┘
 ```
 
 ---
