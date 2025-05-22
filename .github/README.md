@@ -94,7 +94,6 @@ DESCRIPTION
     __attribute__((constructor)).
 
 EXAMPLE
-
     #include <stdio.h>
     #include <cextend/exception.h>
 
@@ -133,7 +132,6 @@ EXAMPLE
     }
 
 LIST OF EXCEPTIONS
-
     CEXTEND_EXCEPTION
 
     CEXTEND_EXCEPTION_LOGIC_ERROR
@@ -171,7 +169,6 @@ LIST OF EXCEPTIONS
     CEXTEND_EXCEPTION_MAX
 
 ATTRIBUTES
-
 ┌───────────────────────────────────────────────────┬───────────────┬─────────┐
 │Interface                                          │ Attribute     │ Value   │
 ├───────────────────────────────────────────────────┼───────────────┼─────────┤
@@ -181,6 +178,166 @@ ATTRIBUTES
 └───────────────────────────────────────────────────┴───────────────┴─────────┘
 ```
 
+### Memory:
+
+```
+NAME
+    safe_strdup, safe_malloc, safe_valloc, safe_realloc, safe_calloc,
+    safe_aligned_alloc, safe_free, retain_smart_ptr, create_smart_ptr,
+    dup_smart_ptr, destroy_smart_ptr, release_smart_ptr, resize_smart_ptr,
+    free_ptr_list - garbage collected memory allocation
+
+SYNOPSIS
+    #include <cextend/memory.h>
+
+    void *safe_strdup(const char *restrict str);
+
+    void *safe_malloc(size_t size, void (*dtor)(void *));
+
+    void *safe_valloc(size_t size, void (*dtor)(void *));
+
+    void *safe_realloc(void *ptr, size_t size, void (*dtor)(void *));
+
+    void *safe_calloc(size_t count, size_t size, void (*dtor)(void *));
+
+    void *safe_aligned_alloc(size_t alignment, size_t size,
+        void (*dtor)(void *));
+
+    void safe_free(void **ptr);
+
+    smart_ptr_t *create_smart_ptr(size_t size, void (*dtor)(void *));
+
+    smart_ptr_t *retain_smart_ptr(smart_ptr_t *ptr);
+
+    smart_ptr_t *dup_smart_ptr(smart_ptr_t *ptr);
+
+    void release_smart_ptr(smart_ptr_t **ptr);
+
+    void destroy_smart_ptr(smart_ptr_t **ptr);
+
+    void resize_smart_ptr(smart_ptr_t **ptr, size_t size);
+
+    #include <cextend/exits/memory_exit.h>
+
+    void free_ptr_list(void);
+
+DESCRIPTION
+    The safe_strdup function performs a strdup(3) call with the string passed
+    as parameter. On success, it returns the newly allocated string. On
+    failure, it throws CEXTEND_EXCEPTION_BAD_ALLOC (see <cextend/exception.h>).
+    The newly allocated pointer will be freed automatically at the end of the
+    execution of the program. If you want to free it manually, use safe_free.
+
+    The safe_malloc function performs a malloc(3) call with the passed
+    parameters. The dtor parameter is the function that should be called to
+    destroy the pointer. If dtor is NULL, it will default to free(3). On
+    success, it returns the newly allocated string. On failure, it throws
+    CEXTEND_EXCEPTION_BAD_ALLOC (see <cextend/exception.h>). The newly
+    allocated pointer will be freed automatically at the end of the execution
+    of the program. If you want to free it manually, use safe_free.
+
+    The safe_valloc function performs a valloc(3) call with the passed
+    parameters. The dtor parameter is the function that should be called to
+    destroy the pointer. If dtor is NULL, it will default to free(3). On
+    success, it returns the newly allocated string. On failure, it throws
+    CEXTEND_EXCEPTION_BAD_ALLOC (see <cextend/exception.h>). The newly
+    allocated pointer will be freed automatically at the end of the execution
+    of the program. If you want to free it manually, use safe_free.
+
+    The safe_realloc function performs a realloc(3) call with the passed
+    parameters. The dtor parameter is the function that should be called to
+    destroy the pointer. If dtor is NULL, it will default to free(3). On
+    success, it returns the newly allocated string. On failure, it throws
+    CEXTEND_EXCEPTION_BAD_ALLOC (see <cextend/exception.h>). The newly
+    allocated pointer will be freed automatically at the end of the execution
+    of the program. If you want to free it manually, use safe_free.
+
+    The safe_calloc function performs a calloc(3) call with the passed
+    parameters. The dtor parameter is the function that should be called to
+    destroy the pointer. If dtor is NULL, it will default to free(3). On
+    success, it returns the newly allocated string. On failure, it throws
+    CEXTEND_EXCEPTION_BAD_ALLOC (see <cextend/exception.h>). The newly
+    allocated pointer will be freed automatically at the end of the execution
+    of the program. If you want to free it manually, use safe_free.
+
+    The safe_aligned_alloc function performs an aligned_alloc(3) call with the
+    passed parameters. The dtor parameter is the function that should be called
+    to destroy the pointer. If dtor is NULL, it will default to free(3). On
+    success, it returns the newly allocated string. On failure, it throws
+    CEXTEND_EXCEPTION_BAD_ALLOC (see <cextend/exception.h>). The newly
+    allocated pointer will be freed automatically at the end of the execution
+    of the program. If you want to free it manually, use safe_free.
+
+    The safe_free function frees the pointer allocated by safe allocations.
+    It uses the dtor that was given at the creation of the pointer if it was
+    not NULL, otherwise it calls free(3). The pointer is set to NULL after its
+    deletion.
+
+    The create_smart_ptr function creates a smart pointer that will be freed
+    automatically at the end of the execution of the program. The size
+    parameter is the size of the inner pointer, and the dtor parameter is the
+    function that will be used to free the inner pointer. The dtor parameter
+    defaults to free if it is set to null On success, it returns the newly
+    created smart pointer. On failure, it throw CEXTEND_EXCEPTION_BAD_ALLOC.
+    In order to free the smart pointer manually, you can eiteher release all
+    its references or destroy it.
+
+    The retain_smart_ptr function returns the smart pointer and increase its
+    reference count.
+
+    The dup_smart_ptr function returns a newly allocated copy of the smart
+    pointer.
+
+    The release_smart_ptr function decreases the smart pointer reference count.
+    It also sets the current pointer reference to NULL.
+
+    The destroy_smart_ptr function frees the smart pointer. It also sets the
+    current pointer reference to NULL.
+
+    The resize_smart_ptr function calls realloc(3) on the smart pointer inner
+    pointer.
+
+    The free_ptr_list function frees all the smart pointers and the pointers
+    allocated by safe_allocs. It is recommended to call it in a function with
+    __attribute__((destructor)).
+
+EXAMPLE
+    #include <cextend/memory.h>
+    #include <cextend/memory_exit.h>
+
+    typedef enum {
+        CEXTEND_MIN_EXIT = 101,
+        CEXTEND_FREE_MEM_EXIT
+    } cextend_destructor_priotiries_t;
+
+    __attribute__((destructor(CEXTEND_FREE_MEM_EXIT)))
+    void c_extent_free_mem_exit(void)
+    {
+        free_ptr_list();
+    }
+
+    int main(void)
+    {
+        smart_ptr_t *ptr = create_smart_ptr(5, NULL);
+        smart_ptr_t *ptr2 = retain_smart_ptr(ptr);
+        smart_ptr_t *ptr3;
+        void *ptr4 = safe_malloc(sizeof(int), NULL);
+
+        *ptr4 = 4;
+        strcpy(ptr->ptr, "test");
+        // Newly allocated pointer
+        ptr3 = dup_smart_ptr(ptr);
+        strcpy(ptr2->ptr, "abdc");
+        release_smart_ptr(&ptr);
+        resize_smart_ptr(&ptr2, 7);
+        strcpy(ptr2->ptr, "abdcef");
+        resize_smart_ptr(&ptr2, 5);
+        strcpy(ptr2->ptr, "abdc");
+        // ptr2 is freed here.
+        release(ptr2);
+        // ptr3 and ptr4 will be freed here.
+    }
+```
 ---
 
 ## WARNING
