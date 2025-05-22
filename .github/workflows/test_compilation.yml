@@ -38,26 +38,26 @@ jobs:
             check.sh $DIR $DIR
             if test -s coding-style-reports.log; then
               while IFS= read -r line; do
-                file=$(echo \"$line\" | cut -d':' -f1)
-                line_num=$(echo \"$line\" | cut -d':' -f2-3)
-                error_type=$(echo \"$line\" | cut -d' ' -f2 | cut -d':' -f1)
-                if [ \"$error_type\" = \"MAJOR\" ]; then
-                    error+=3
+                file=$(echo "$line" | cut -d":" -f1)
+                line_num=$(echo "$line" | cut -d":" -f2-3)
+                error_type=$(echo "$line" | cut -d" " -f2 | cut -d":" -f1)
+                if [ "$error_type" = "MAJOR" ]; then
+                  error+=3
                 fi
-                if [ \"$error_type\" = \"MINOR\" ]; then
-                    error+=1
+                if [ "$error_type" = "MINOR" ]; then
+                  error+=1
                 fi
-                error_name=$(echo \"$line\" | cut -d':' -f4)
-                title=\"$error_type  coding style error:\"
-                echo \"::error file=$file,line=$line_num::$title $error_name\"
-                if [ \"$error\" -ge 4 ]; then
-                    echo \"::error:: /!\\ TOO MANY CODING_STYLE INFRACTION /!\\\"
-                    exit 1
+                error_name=$(echo "$line" | cut -d":" -f4)
+                title="$error_type  coding style error:"
+                echo "::error file=$file,line=$line_num::$title $error_name"
+                if [ "$error" -ge 4 ]; then
+                  echo "::error:: /!\\ TOO MANY CODING_STYLE INFRINGMENTS /!\\"
+                  exit 1
                 fi
               done < coding-style-reports.log
-              echo \"$error\"
+              echo "$error"
             else
-              echo \"::notice:: No coding-style error detected, good work.\"
+              echo "::notice:: No coding-style error detected, good work."
             fi
           '
 
