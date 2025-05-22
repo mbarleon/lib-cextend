@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2025
-** coding-style-war-crimes
+** lib-cextend
 ** File description:
 ** zap_srv_init_log_entry
 */

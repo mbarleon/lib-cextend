@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2025
-** coding-style-war-crimes
+** lib-cextend
 ** File description:
 ** cextend_log_init_entry
 */
