@@ -27,13 +27,13 @@ static bool is_logger_init(bool init)
 static cextend_logger_type_infos_t get_infos(const cextend_log_type_t type)
 {
     switch (type) {
-        case LOG_INFO:
+        case CEXTEND_LOG_INFO:
             return (cextend_logger_type_infos_t)
                 {CEXTEND_LOGGER_INFO_STR, CEXTEND_LOGGER_CYELLOW, stdout};
-        case LOG_WARNING:
+        case CEXTEND_LOG_WARNING:
             return (cextend_logger_type_infos_t)
                 {CEXTEND_LOGGER_WARNING_STR, CEXTEND_LOGGER_CPURPLE, stderr};
-        case LOG_ERROR:
+        case CEXTEND_LOG_ERROR:
             return (cextend_logger_type_infos_t)
                 {CEXTEND_LOGGER_ERROR_STR, CEXTEND_LOGGER_CRED, stderr};
         default:

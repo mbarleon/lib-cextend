@@ -358,16 +358,16 @@ SYNOPSIS
     CEXTEND_INIT_LOG
 
 DESCRIPTION
-    The CEXTEND_LOG macro takes a type (LOG_INFO, LOG_WARNING, LOG_ERROR), a
-    format (see printf(3) for more informations) and optional variadic
-    arguments depending on the format. It returns the number of characters
-    printed. This macro will only print if DEBUG was defined before the
-    inclusion of the <cextend/logger.h> header.
+    The CEXTEND_LOG macro takes a type (CEXTEND_LOG_INFO, CEXTEND_LOG_WARNING,
+    CEXTEND_LOG_ERROR), a format (see printf(3) for more informations) and
+    optional variadic arguments depending on the format. It returns the number
+    of characters printed. This macro will only print if DEBUG was defined
+    before the inclusion of the <cextend/logger.h> header.
 
-    The CEXTEND_PRT macro takes a type (LOG_INFO, LOG_WARNING, LOG_ERROR), a
-    format (see printf(3) for more informations) and optional variadic
-    arguments depending on the format. It returns the number of characters
-    printed.
+    The CEXTEND_PRT macro takes a type (CEXTEND_LOG_INFO, CEXTEND_LOG_WARNING,
+    CEXTEND_LOG_ERROR), a format (see printf(3) for more informations) and
+    optional variadic arguments depending on the format. It returns the number
+    of characters printed.
 
     The CEXTEND_INIT_LOG macro initializes the logger. It is recommended to
     call this macro in a function with __attribute__((constructor)).
@@ -389,8 +389,8 @@ EXAMPLE
 
     int main(void)
     {
-        CEXTEND_LOG(LOG_ERROR, "This will not print!");
-        CEXTEND_PRT(LOG_INFO, "But this will [%d]!", 42);
+        CEXTEND_LOG(CEXTEND_LOG_ERROR, "This will not print!");
+        CEXTEND_PRT(CEXTEND_LOG_INFO, "But this will [%d]!", 42);
         return 0;
     }
 
