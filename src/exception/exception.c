@@ -53,7 +53,8 @@ static void check_stack(const cextend_exception_context_t *ctxt,
         CEXTEND_PRT(CEXTEND_LOG_ERROR, "Uncaught exception: %s",
             get_exception_str(code));
     } else {
-        CEXTEND_PRT(CEXTEND_LOG_ERROR, "Exception stack was illegaly modified");
+        CEXTEND_PRT(CEXTEND_LOG_ERROR,
+            "Exception stack was illegaly modified");
     }
     is_aborting(true);
     print_stacktrace();
