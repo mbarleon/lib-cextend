@@ -101,9 +101,9 @@ add_custom_command(TARGET cextend POST_BUILD
 
 ########################################
 
-option(ENABLE_DEBUG "Enable debug definition" OFF)
+option(CEXTEND_ENABLE_DEBUG "Enable debug definition" OFF)
 
-if(ENABLE_DEBUG)
+if(CEXTEND_ENABLE_DEBUG)
     target_compile_definitions(cextend PRIVATE CEXTEND_DEBUG=1)
 endif()
 

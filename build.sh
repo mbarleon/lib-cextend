@@ -42,7 +42,7 @@ function _debug()
     _success "command 'cmake' found, building..."
     mkdir -p build
     cd build || _error "mkdir failed"
-    cmake "${CMAKE_SOURCE_DIR}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DENABLE_DEBUG=ON
+    cmake "${CMAKE_SOURCE_DIR}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCEXTEND_ENABLE_DEBUG=ON
     if make -j"$(nproc)" cextend; then
         _success "compiled cextend"
         exit 0
