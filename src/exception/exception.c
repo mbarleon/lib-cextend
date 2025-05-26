@@ -35,7 +35,7 @@ static void *init_internals(void)
         sizeof(cextend_exception_internal_t));
 
     if (!internal) {
-        CEXTEND_LOG(LOG_ERROR, "could not allocate memory for try");
+        CEXTEND_LOG(CEXTEND_LOG_ERROR, "could not allocate memory for try");
         return NULL;
     }
     memset(internal, 0, sizeof(cextend_exception_internal_t) / sizeof(char));
@@ -50,10 +50,10 @@ static void check_stack(const cextend_exception_context_t *ctxt,
     if (ctxt && ctxt->__internals) {
         return;
     } else if (ctxt == NULL) {
-        CEXTEND_PRT(LOG_ERROR, "Uncaught exception: %s",
+        CEXTEND_PRT(CEXTEND_LOG_ERROR, "Uncaught exception: %s",
             get_exception_str(code));
     } else {
-        CEXTEND_PRT(LOG_ERROR, "Exception stack was illegaly modified");
+        CEXTEND_PRT(CEXTEND_LOG_ERROR, "Exception stack was illegaly modified");
     }
     is_aborting(true);
     print_stacktrace();
@@ -75,7 +75,7 @@ cextend_exception_context_t *init_try(void)
         sizeof(cextend_exception_context_t));
 
     if (!ctxt) {
-        CEXTEND_LOG(LOG_ERROR, "could not allocate memory for try");
+        CEXTEND_LOG(CEXTEND_LOG_ERROR, "could not allocate memory for try");
         throw(CEXTEND_EXCEPTION_BAD_ALLOC);
     }
     memset(ctxt, 0, sizeof(cextend_exception_context_t) / sizeof(char));
