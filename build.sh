@@ -59,17 +59,17 @@ function _tests_run()
     mkdir -p build
     cd build || _error "mkdir failed"
     cmake "${CMAKE_SOURCE_DIR}" -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
-    if ! make -j"$(nproc)" unit_tests; then
-        _error "unit tests compilation error" "failed to compile unit_tests"
+    if ! make -j"$(nproc)" cextend_unit_tests; then
+        _error "unit tests compilation error" "failed to compile cextend_unit_tests"
     fi
     cd .. || _error "cd failed"
-    if ! ./unit_tests; then
+    if ! ./cextend_unit_tests; then
         _error "unit tests error" "unit tests failed!"
     fi
     _success "unit tests succeed!"
     if [ "$(uname -s)" == 'Darwin' ]; then
-        xcrun llvm-profdata merge -sparse unit_tests-*.profraw -o unit_tests.profdata
-        xcrun llvm-cov report ./unit_tests -instr-profile=unit_tests.profdata -ignore-filename-regex='.*/tests/.*' -enable-name-compression > code_coverage.txt
+        xcrun llvm-profdata merge -sparse cextend_unit_tests-*.profraw -o cextend_unit_tests.profdata
+        xcrun llvm-cov report ./cextend_unit_tests -instr-profile=cextend_unit_tests.profdata -ignore-filename-regex='.*/tests/.*' -enable-name-compression > code_coverage.txt
     else
         gcovr -r . --exclude tests/ > code_coverage.txt
     fi
@@ -84,7 +84,7 @@ function _clean()
 function _fclean()
 {
     _clean
-    rm -rf cextend unit_tests plugins code_coverage.txt unit_tests-*.profraw unit_tests.profdata \
+    rm -rf cextend cextend_unit_tests plugins code_coverage.txt cextend_unit_tests-*.profraw cextend_unit_tests.profdata \
     libs/libcextend.* vgcore* cmake-build-debug a.out
 }
 

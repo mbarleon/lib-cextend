@@ -10,9 +10,9 @@
     #include "../../include/cextend/macro.h"
 
 typedef enum {
-    LOG_INFO,
-    LOG_WARNING,
-    LOG_ERROR
+    CEXTEND_LOG_INFO,
+    CEXTEND_LOG_WARNING,
+    CEXTEND_LOG_ERROR
 } cextend_log_type_t;
 
 int logger(cextend_log_type_t type, const char *restrict fmt, ...);
@@ -20,7 +20,7 @@ int logger_off(UNUSED cextend_log_type_t type,
     UNUSED const char *restrict fmt, ...);
 
 
-    #if defined(DEBUG)
+    #if defined(CEXTEND_DEBUG)
         #define __CEXT_LOG logger
     #else
         #define __CEXT_LOG logger_off
