@@ -21,7 +21,7 @@ void catch_end(const int code);
     #define __CATCH(code, expected) else if (catch_code(code, expected))
     #define __CATCH_ALL else
     #define __CATCH_END__(code) catch_end(code)
-    #define __CATCH_END(code) CATCH_ALL __CATCH_END__(code)
+    #define __CATCH_END(code) __CATCH_ALL __CATCH_END__(code)
     #define __END_TRY end_try()
     #define __THROW__(code) throw(code)
 
