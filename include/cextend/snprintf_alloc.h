@@ -9,6 +9,7 @@
     #define CEXTEND_SNPRINTF_ALLOC_H_
     #include <stdarg.h>
 
+__attribute__((format(printf, 1, 2)))
 char *snprintf_alloc(const char *restrict format, ...);
 char *vsnprintf_alloc(const char *restrict format, const va_list args);
 
