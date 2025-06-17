@@ -52,3 +52,4 @@ build/
 *.dylib
 a.out.dSYM/
 !test_compilation.yml
+!.github/CODEOWNERS
